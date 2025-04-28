@@ -83,7 +83,7 @@ class MultiHeadAttention(nn.Module):
         k = self.linear_k(key).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
         v = self.linear_v(value).view(batch_size, -1, self.num_heads, self.d_k).transpose(1, 2)
 
-        # apple the scaled dot product attention
+        # apply the scaled dot product attention
         attn_output, attn = self.scaled_dot_product_attention(q, k, v, mask)
 
         # concatenate heads, we need to get the output back to the origial shape
