@@ -17,7 +17,7 @@ class FeedForward:
         self.b2 = Input(1, d_model)
         self.b2.randomize()
 
-        # Placeholders for Linear/ReLU layers
+        # Linear/ReLU layers
         self.lin1 = None
         self.relu_layer = None
         self.lin2 = None
@@ -35,7 +35,7 @@ class FeedForward:
         return self.lin2
 
     def backward(self):
-        # Backprop through second linear, ReLU, then first linear
+        # Backprop
         self.lin2.backward()
         self.relu_layer.backward()
         self.lin1.backward()

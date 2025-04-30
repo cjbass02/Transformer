@@ -1,6 +1,7 @@
 import torch
 import numpy as np
 
+
 class Layer:
     def __init__(self, rows, cols):
         # General superclass for all layers
@@ -156,7 +157,6 @@ class Softmax(Layer):
     Assumes inputs are 2D [T, V].
     """
     def __init__(self, x_layer, y_layer):
-        # x_layer.output: logits [T, V]; y_layer.output: one-hot [T, V]
         T, V = x_layer.output.shape
         super().__init__(T, V)
         self.x = x_layer

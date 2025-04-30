@@ -9,7 +9,7 @@ class RMSNorm(layers.Layer):
         self.gamma = gamma
 
     def forward(self):
-        x = self.x.output  # [T, D]
+        x = self.x.output 
         T, D = x.shape
         std = torch.sqrt((x**2).sum(dim=1, keepdim=True)/D)
         out = x/(std+1e-9) * self.gamma.output
@@ -19,7 +19,6 @@ class RMSNorm(layers.Layer):
 
     def backward(self):
         x = self.x.output; g = self.gamma.output; grad = self.grad
-        # compute dJ/dgamma and dJ/dx as before
         dJdg = ((x/(torch.sqrt((x**2).sum(dim=1, keepdim=True)/x.shape[1])+1e-9))*grad).sum(dim=0, keepdim=True)
         simple = grad * g / torch.sqrt((x**2).sum(dim=1, keepdim=True)/x.shape[1])
         dJdx = simple - x*(simple*x).sum(dim=1,keepdim=True)/(x.shape[1]* (torch.sqrt((x**2).sum(dim=1, keepdim=True)/x.shape[1])+1e-9)**2)

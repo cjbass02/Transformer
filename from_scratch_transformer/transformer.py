@@ -5,18 +5,18 @@ from .decoder_block import DecoderBlock
 
 class Transformer:
     def __init__(self, vocab_size, d_model, num_heads, d_ff, num_layers, max_len=5000):
-        # 1) Token embedding table (learnable)
+        # Token embedding table (learnable)
         self.embed_weights = Input(vocab_size, d_model)
         self.embed_weights.randomize()
 
-        # 2) Positional encoding layer (no learnable params)
+        # Positional encoding layer (no learnable params)
         self.pos_enc = PositionalEncoding(d_model, max_len)
 
-        # 3) Stack of decoder blocks
+        # Stack of decoder blocks
         self.blocks = [DecoderBlock(d_model, num_heads, d_ff)
                        for _ in range(num_layers)]
 
-        # 4) Final linear projection weights & bias
+        #Final linear projection weights & bias
         self.output_w = Input(d_model, vocab_size)
         self.output_w.randomize()
         self.output_b = Input(1, vocab_size)
@@ -27,10 +27,10 @@ class Transformer:
         """
         tokens: LongTensor of shape [T]
         """
-        # Embed & scale: [T, D]
+        # Embed and scale
         emb = self.embed_weights.output[tokens] * (self.embed_weights.cols ** 0.5)
 
-        # Wrap embeddings into an Input layer
+        # embeddings into an Input layer
         emb_layer = Input(emb.shape[0], emb.shape[1])
         emb_layer.set(emb)
 
@@ -68,7 +68,6 @@ class Transformer:
             blk.step(learning_rate= learning_rate)
 
     def clear_grad(self):
-        # clear gradients for all layers
         self.embed_weights.clear_grad()
         self.output_w.clear_grad()
         self.output_b.clear_grad()
