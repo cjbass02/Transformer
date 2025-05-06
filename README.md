@@ -16,21 +16,45 @@ This repo features two GPT-style decoder only transformer APIs. The first, a pyt
 
 ### Repository Structure
 
-├── layers.py # Core Layer classes: Input, Linear, ReLU, Sum, Concat, Softmax 
+├── from_scratch_transformer: no autograd
+    
+    ├── layers.py # Core Layer classes: Input, Linear, ReLU, Sum, Concat, Softmax 
+    
+    ├── positional_encoding.py # Trigonometric positional encodings 
+    
+    ├── rms_norm.py # Custom RMSNorm layer (γ scale + backprop) 
+    
+    ├── feed_forward.py # Two-layer feed-forward network (Linear → ReLU → Linear) 
+    
+    ├── multihead_attention.py # From-scratch multi-head self-attention (2D inputs) 
+    
+    ├── decoder_block.py # Single Transformer decoder block (MHA → Norm → FF → Norm) 
+    
+    ├── transformer.py # Stacked decoder blocks + embedding + output projection 
+    
+├── pytorch_transformer: uses autograd
+    
+    ├── positional_encoding.py # Trigonometric positional encodings 
+    
+    ├── feed_forward.py # Two-layer feed-forward network (Linear → ReLU → Linear) 
+    
+    ├── multihead_attention.py # multi-head self-attention
+    
+    ├── decoder_block.py # Single Transformer decoder block (MHA → Norm → FF → Norm) 
+    
+    ├── transformer.py # Stacked decoder blocks + embedding + output projection 
 
-├── positional_encoding.py # Trigonometric positional encodings 
+    ├── encoder_block.py # Encoder stub (works, but commented out) juts in case
 
-├── rms_norm.py # Custom RMSNorm layer (γ scale + backprop) 
+    ├── decoder.py #legacy, not used
 
-├── feed_forward.py # Two-layer feed-forward network (Linear → ReLU → Linear) 
+├── dummy_vocab.py # A word bank to test training
 
-├── multihead_attention.py # From-scratch multi-head self-attention (2D inputs) 
+├── pytorch_test_forward # POC forward pass test on the pytorch transformer
 
-├── decoder_block.py # Single Transformer decoder block (MHA → Norm → FF → Norm) 
+├── pytorch_test_backward # POC backwards training test on the pytorch transformer
 
-├── transformer.py # Stacked decoder blocks + embedding + output projection 
-
-├── from_scratch_training.py# Training loop Test: sequences of length seq_len, Softmax loss, 
+├── from_scratch_training.py # Training loop Test for from_scratch_transformer: sequences of length seq_len, Softmax loss, 
 
 ├── input.txt # Example training data (Shakespeare, etc.) 
 
