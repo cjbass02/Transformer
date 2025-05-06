@@ -3,6 +3,12 @@ from . import layers
 import torch
 
 class RMSNorm(layers.Layer):
+
+    """
+    RMSNorm layer for Transformer.
+    This class normalizes the input using the root mean square of the input values.
+    It is similar to LayerNorm but uses RMS instead of mean and variance.
+    """
     def __init__(self, x_layer, gamma):
         super().__init__(0,0)
         self.x = x_layer

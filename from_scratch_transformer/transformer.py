@@ -4,6 +4,12 @@ from .positional_encoding import PositionalEncoding
 from .decoder_block import DecoderBlock
 
 class Transformer:
+    """
+    Transformer model for sequence-to-sequence tasks.
+    This class implements the decoder part of the Transformer architecture.
+    It includes token embeddings, positional encoding, and a stack of decoder blocks.
+    """
+    
     def __init__(self, vocab_size, d_model, num_heads, d_ff, num_layers, max_len=5000):
         # Token embedding table (learnable)
         self.embed_weights = Input(vocab_size, d_model)

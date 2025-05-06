@@ -4,6 +4,12 @@ from . import layers
 import math
 
 class PositionalEncoding(layers.Layer):
+    """
+    Positional Encoding for Transformer.
+    This class adds positional information to the input embeddings.
+    It uses sine and cosine functions of different frequencies to encode the position.
+    """
+
     def __init__(self, d_model, max_len=5000):
         super().__init__(max_len, d_model)
         pe = torch.zeros(max_len, d_model)

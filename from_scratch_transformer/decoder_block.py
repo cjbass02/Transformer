@@ -5,6 +5,12 @@ from .feed_forward import FeedForward
 from .rms_norm import RMSNorm
 
 class DecoderBlock:
+    """
+    Decoder block for Transformer.
+    This class implements a single decoder block consisting of multi-head self-attention and feed-forward layers.
+    It also includes residual connections and layer normalization.
+    """
+    
     def __init__(self, d_model, num_heads, d_ff):
         self.self_attn = MultiHeadAttention(d_model, num_heads)
         self.ff = FeedForward(d_model, d_ff)

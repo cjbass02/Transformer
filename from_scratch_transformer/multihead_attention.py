@@ -39,14 +39,25 @@ class MultiHeadAttention:
         self.concat = None
 
     def split_heads(self, x):
+        """
+        Split the last dimension into (num_heads, d_k) and transpose the result to (num_heads, T, d_k).
+        """
+
         T, D = x.shape
         return x.view(T, self.num_heads, self.d_k).transpose(0, 1)
 
     def combine_heads(self, x):
+        """
+        Combine the heads back into the original shape.
+        """
+        
         T = x.shape[1]
         return x.transpose(0, 1).contiguous().view(T, self.d_model)
 
     def scaled_dot_product_attention(self, q, k, v, mask=None):
+        """
+        Scaled dot-product attention as written in the attention paper.
+        """
         # q,k,v
         scores = (q @ k.transpose(-2, -1)) / math.sqrt(self.d_k)
         if mask is not None:
@@ -132,6 +143,7 @@ class MultiHeadAttention:
 
 
     def step(self, learning_rate):
+        # Update learnable parameters
         self.linear_q.step(learning_rate= learning_rate)
         self.linear_k.step(learning_rate= learning_rate)
         self.linear_v.step(learning_rate= learning_rate)
@@ -147,6 +159,7 @@ class MultiHeadAttention:
 
 
     def clear_grad(self):
+        # Clear gradients for all learnable parameters
         self.linear_q.clear_grad()
         self.linear_k.clear_grad()
         self.linear_v.clear_grad()

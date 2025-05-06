@@ -2,6 +2,19 @@ import torch
 import numpy as np
 
 
+"""
+Layer building blocks for a neural network.
+This is a simplified version of the layers used in PyTorch.
+The layers are designed to be used in a custom neural network framework.
+The layers include:
+- Input: Accepts input data and sets the output.
+- Linear: Fully connected layer with weights and biases.
+- ReLU: Rectified Linear Unit activation function.
+- Sum: Elementwise sum of two layers.
+- Concat: Concatenation of multiple layers along the feature dimension.
+- Softmax: Softmax activation function with cross-entropy loss.
+- Layer: General superclass for all layers.
+"""
 class Layer:
     def __init__(self, rows, cols):
         # General superclass for all layers
