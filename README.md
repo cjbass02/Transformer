@@ -16,56 +16,37 @@ It also features a FastAPI API for creating, training, and sentance completion.
 ---
 
 ### Repository Structure
-
-├── from_scratch_transformer: no autograd
-    
-    ├── layers.py # Core Layer classes: Input, Linear, ReLU, Sum, Concat, Softmax 
-    
-    ├── positional_encoding.py # Trigonometric positional encodings 
-    
-    ├── rms_norm.py # Custom RMSNorm layer (γ scale + backprop) 
-    
-    ├── feed_forward.py # Two-layer feed-forward network (Linear → ReLU → Linear) 
-    
-    ├── multihead_attention.py # From-scratch multi-head self-attention (2D inputs) 
-    
-    ├── decoder_block.py # Single Transformer decoder block (MHA → Norm → FF → Norm) 
-    
-    ├── transformer.py # Stacked decoder blocks + embedding + output projection 
-    
-├── pytorch_transformer: uses autograd
-    
-    ├── positional_encoding.py # Trigonometric positional encodings 
-    
-    ├── feed_forward.py # Two-layer feed-forward network (Linear → ReLU → Linear) 
-    
-    ├── multihead_attention.py # multi-head self-attention
-    
-    ├── decoder_block.py # Single Transformer decoder block (MHA → Norm → FF → Norm) 
-    
-    ├── transformer.py # Stacked decoder blocks + embedding + output projection 
-
-    ├── encoder_block.py # Encoder stub (works, but commented out) juts in case
-
-    ├── decoder.py #legacy, not used
-
-    ├── dummy_vocab.py # A word bank to test training
-
-    ├── pytorch_test_forward # POC forward pass test on the pytorch transformer
-
-    ├── pytorch_test_backward # POC backwards training test on the pytorch transformer
-
-├── from_scratch_training.ipynb # Training loop test for from_scratch_transformer: Used for training on MSOE's supercomputer.
-
-├── input.txt # Example training data (Shakespeare, etc.) 
-
-├── input_short.txt # Shortened training data, better for testing 
-
-├── transformer_api.py # FastAPI API for training and inference
-
-├── fast_api_test.ipynb # FastAPI test script
-
+```
+.
+├─ from_scratch_transformer/       # no autograd
+│  ├─ layers.py                    # Core Layer classes: Input, Linear, ReLU, Sum, Concat, Softmax
+│  ├─ positional_encoding.py       # Trigonometric positional encodings
+│  ├─ rms_norm.py                  # Custom RMSNorm layer (γ scale + backprop)
+│  ├─ feed_forward.py              # Two‑layer feed‑forward network (Linear → ReLU → Linear)
+│  ├─ multihead_attention.py       # From‑scratch multi‑head self‑attention (2D inputs)
+│  ├─ decoder_block.py             # Single Transformer decoder block (MHA → Norm → FF → Norm)
+│  └─ transformer.py               # Stacked decoder blocks + embedding + output projection
+│
+├─ pytorch_transformer/            # uses autograd
+│  ├─ positional_encoding.py       # Trigonometric positional encodings
+│  ├─ feed_forward.py              # Two‑layer feed‑forward network (Linear → ReLU → Linear)
+│  ├─ multihead_attention.py       # Multi‑head self‑attention
+│  ├─ decoder_block.py             # Single Transformer decoder block (MHA → Norm → FF → Norm)
+│  ├─ transformer.py               # Stacked decoder blocks + embedding + output projection
+│  ├─ encoder_block.py             # Encoder stub (works, but commented out)
+│  ├─ decoder.py                   # Legacy, not used
+│  ├─ dummy_vocab.py               # A word bank to test training
+│  ├─ pytorch_test_forward         # POC forward‑pass test on the PyTorch transformer
+│  └─ pytorch_test_backward        # POC backward‑training test on the PyTorch transformer
+│
+├─ from_scratch_training.ipynb      # Training loop test for from_scratch_transformer (MSOE supercomputer)
+├─ input.txt                        # Example training data (Shakespeare, etc.)
+├─ input_short.txt                  # Shortened training data, better for testing
+├─ transformer_api.py               # FastAPI API for training and inference
+└─ fast_api_test.ipynb              # FastAPI test script
+```
 ---
+
 
 ### Requirements
 
