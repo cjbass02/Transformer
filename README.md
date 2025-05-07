@@ -1,6 +1,8 @@
 # Dual Transformer Implementation
 This repo features two GPT-style decoder only transformer APIs. The first, a pytorch supported one which uses autograd to manage backpropagation. The Second, a from scratch version that implements its own logic for **every** layer, including backpropagation, decoder blocks, attention, etc.
 
+The goal of this project was to learn how simple deep learning layers work together to create complex models, such as a transformer. The hardest part being how gradients are back propigated through the hundreds of layers and neurons.
+
 It also features a FastAPI API for creating, training, and sentance completion.
 
 ---
