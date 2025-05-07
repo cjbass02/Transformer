@@ -1,6 +1,7 @@
 # Dual Transformer Implementation
 This repo features two GPT-style decoder only transformer APIs. The first, a pytorch supported one which uses autograd to manage backpropagation. The Second, a from scratch version that implements its own logic for **every** layer, including backpropagation, decoder blocks, attention, etc.
 
+It also features a FastAPI API for creating, training, and sentance completion.
 
 ---
 ## From Scratch Implementation
@@ -48,15 +49,21 @@ This repo features two GPT-style decoder only transformer APIs. The first, a pyt
 
     ├── decoder.py #legacy, not used
 
-├── dummy_vocab.py # A word bank to test training
+    ├── dummy_vocab.py # A word bank to test training
 
-├── pytorch_test_forward # POC forward pass test on the pytorch transformer
+    ├── pytorch_test_forward # POC forward pass test on the pytorch transformer
 
-├── pytorch_test_backward # POC backwards training test on the pytorch transformer
+    ├── pytorch_test_backward # POC backwards training test on the pytorch transformer
 
-├── from_scratch_training.py # Training loop Test for from_scratch_transformer: sequences of length seq_len, Softmax loss, 
+├── from_scratch_training.ipynb # Training loop test for from_scratch_transformer: Used for training on MSOE's supercomputer.
 
 ├── input.txt # Example training data (Shakespeare, etc.) 
+
+├── input_short.txt # Shortened training data, better for testing 
+
+├── transformer_api.py # FastAPI API for training and inference
+
+├── fast_api_test.ipynb # FastAPI test script
 
 ---
 
@@ -69,3 +76,10 @@ Install via:
 
 ```bash
 pip install torch
+pip install fastapi
+pip install uvicorn
+```
+
+### FastAPI Setup
+```bash
+uvicorn transformer_api:app --host 0.0.0.0 --port 8000 --reload
