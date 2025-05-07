@@ -3,7 +3,7 @@ import torch
 import torch.nn.functional as F
 from torch.optim import Adam
 from pytorch_transformer.transformer import Transformer
-from dummy_vocab import dummy_vocab  # our large dummy vocabulary
+from pytorch_transformer.dummy_vocab import dummy_vocab  # our large dummy vocabulary
 
 # Set vocab_size based on our dummy vocabulary.
 vocab_size = len(dummy_vocab)
